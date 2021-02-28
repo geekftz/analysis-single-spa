@@ -14,8 +14,10 @@ export function toLoadPromise(app) {  //注意这里也是注册一个微任务�
 　　 //这里注册了一个微任务，并把返回结果赋值给了app.loadPromise
     return (app.loadPromise = Promise.resolve()
       .then(() => {
-        //这里开始执行loadApp，可以回头看看loadApp是什么东西，loadApp我们传入registerApplication的加载函数!!　　　　 //这里就是真正执行我们的加载函数。我们的加载函数可能是这么写的(如下)，说明这里就是把我们为应用的script标签注入到html上　　　
-// app: async () => {//     await runScript('http://127.0.0.1:8081/static/js/chunk-vendors.js');//     await runScript('http://127.0.0.1:8081/static/js/app.js');// },
+        //这里开始执行loadApp，可以回头看看loadApp是什么东西，loadApp我们传入registerApplication的加载函数!!　　　　 
+        //这里就是真正执行我们的加载函数。我们的加载函数可能是这么写的(如下)，说明这里就是把我们为应用的script标签注入到html上　　　
+        // app: async () => {//     await runScript('http://127.0.0.1:8081/static/js/chunk-vendors.js');
+        //     await runScript('http://127.0.0.1:8081/static/js/app.js');// },
         const loadPromise = app.loadApp(getProps(app));
         //这个校验传入register的第二个参数返回的是不是promise
         if (!smellsLikeAPromise(loadPromise)) {
