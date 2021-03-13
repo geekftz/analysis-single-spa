@@ -15,7 +15,7 @@ export function reroute(pendingPromises = [], eventArguments) {　
       });
     });
   }
-  
+
   const {
     appsToUnload,
     appsToUnmount,
